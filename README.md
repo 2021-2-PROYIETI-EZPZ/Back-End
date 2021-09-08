@@ -12,15 +12,16 @@ In the **Back-End** repository you will find in detail all the source code relat
 ## Members
 [Alejandro Toro Daza](https://github.com/Skullzo)
 
+[Jonathan Fabian Paez Torres](https://github.com/jfpazto)
+
+[Jairo Eduardo Pulido Rincon](https://github.com/Killersys)
+
+[Andres Jose Gutierrez Marin](https://github.com/JoseGutierrezMairn)
+
 [Rubian Camilo Saenz Rodriguez](https://github.com/camilosaenz)
 
 [Carlos Andres Amorocho Amorocho](https://github.com/Carlos96999)
 
-[Andres Jose Gutierrez Marin](https://github.com/JoseGutierrezMairn)
-
-[Jonathan Fabian Paez Torres](https://github.com/jfpazto)
-
-[Jairo Eduardo Pulido Rincon](https://github.com/Killersys)
 ## License and Copyrights
 **©** Alejandro Toro Daza, Rubian Camilo Saenz Rodriguez, Carlos Andres Amorocho Amorocho, Andres Jose Gutierrez Marin, Jonathan Fabian Paez Torres, Jairo Eduardo Pulido Rincon, Systems Engineering students of the [Colombian School of Engineering Julio Garavito](https://www.escuelaing.edu.co/es/).
       
