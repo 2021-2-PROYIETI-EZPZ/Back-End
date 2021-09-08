@@ -9,6 +9,14 @@ In the **Back-End** repository you will find in detail all the source code relat
 * [Project Main Repository](https://github.com/2021-2-PROYIETI-EZPZ/Project).
 * [Project Front-End](https://github.com/2021-2-PROYIETI-EZPZ/Front-End).
 
+## Link to the Continuous Integration System (Circle CI)
+
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://app.circleci.com/pipelines/github/2021-2-PROYIETI-EZPZ/Back-End)
+
+## Link to Codacy
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4730fa995aab41c5901b186d5fb0f1c5)](https://www.codacy.com/gh/2021-2-PROYIETI-EZPZ/Back-End/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=2021-2-PROYIETI-EZPZ/Back-End&amp;utm_campaign=Badge_Grade)
+
 ## Members
 [Alejandro Toro Daza](https://github.com/Skullzo)
 
