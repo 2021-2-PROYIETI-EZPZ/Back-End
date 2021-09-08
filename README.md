@@ -6,7 +6,7 @@ In the **Back-End** repository you will find in detail all the source code relat
 
 ## Project Repositories
 
-* [Project main repository](https://github.com/2021-2-PROYIETI-EZPZ/Proyect).
+* [Project Main Repository](https://github.com/2021-2-PROYIETI-EZPZ/Project).
 * [Project Front-End](https://github.com/2021-2-PROYIETI-EZPZ/Front-End).
 
 ## Members
