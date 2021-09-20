@@ -17,6 +17,9 @@ public class SellerController {
         return sellerService.createSeller( dto );
     }
 
-    
+    @PutMapping("/{email}")
+    public Seller updateSeller(@RequestBody SellerDto dto, @PathVariable String email){
+        return sellerService.updateSeller(dto, email);
+    }
 
 }

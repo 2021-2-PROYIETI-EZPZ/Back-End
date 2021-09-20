@@ -29,4 +29,16 @@ public class SellerServiceImpl implements SellerService {
         return sellerRepository.save(new Seller(dto.getEmail(), dto.getName(), dto.getUsername(), dto.getPassword(), dto.getLinkPage(), memberShip));
     }
 
+    @Override
+    public Seller updateSeller(SellerDto dto, String email) {
+
+        if(sellerRepository.findById(email).isPresent()){
+            Seller seller = sellerRepository.findById(email).get();
+            seller.update(dto);
+            sellerRepository.save(seller);
+            return seller;
+        }
+        return null;
+    }
+
 }

@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "675483f9-f9f0-4407-b59a-c25a95996186",
+		"name": "EZPZ_CRUD_Vendedor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createSeller",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"testSeller\",\r\n    \"name\":\"mercado test\",\r\n    \"username\":\"mercadotest\",\r\n    \"password\":\"123456test\",\r\n    \"linkPage\":\"www.testmercado.com\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_02\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ezpz/v1/seller",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ezpz",
+						"v1",
+						"seller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSeller",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"testSeller\",\r\n    \"name\":\"mercado test2\",\r\n    \"username\":\"merktest\",\r\n    \"password\":\"123456test\",\r\n    \"linkPage\":\"www.merktest.com\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_02\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ezpz/v1/seller/testSeller",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ezpz",
+						"v1",
+						"seller",
+						"testSeller"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

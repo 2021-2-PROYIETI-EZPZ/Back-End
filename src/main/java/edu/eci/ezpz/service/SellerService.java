@@ -7,4 +7,5 @@ public interface SellerService {
 
     Seller createSeller(SellerDto dto);
 
+    Seller updateSeller(SellerDto dto, String email);
 }

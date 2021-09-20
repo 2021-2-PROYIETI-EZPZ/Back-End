@@ -1,6 +1,7 @@
 package edu.eci.ezpz.repository.document;
 
 
+import edu.eci.ezpz.controller.seller.SellerDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -79,5 +80,12 @@ public class Seller {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void update(SellerDto dto) {
+        this.name = dto.getName();
+        this.linkPage = dto.getLinkPage();
+        this.email = dto.getEmail();
+        this.username = dto.getUsername();
     }
 }
