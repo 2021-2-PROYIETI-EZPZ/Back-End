@@ -1,9 +1,8 @@
 package edu.eci.ezpz.service.impl;
 import edu.eci.ezpz.controller.administrator.AdministratorDto;
-import edu.eci.ezpz.exception.AdministratorNotFoundException;
 import edu.eci.ezpz.repository.AdministratorRepository;
-import edu.eci.ezpz.repository.document.Administrator;
 import edu.eci.ezpz.repository.document.MemberShip;
+import edu.eci.ezpz.repository.document.Administrator;
 import edu.eci.ezpz.service.AdministratorService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +11,29 @@ import org.springframework.stereotype.Service;
 public class AdministratorServiceImpl implements AdministratorService {
 
     @Autowired
-    private AdministratorRepository repository;
+    private AdministratorRepository administratorRepository;
 
     @Override
     public Administrator createAdministrator(AdministratorDto dto) {
-        MemberShip ms =  new MemberShip();
-        for( String[] m : Constants.memberships ){
-            if( m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
-                ms.setActive( dto.getCurrentMemberShip().isActive() );
-                ms.setName( m[1] );
-                ms.setDescription( m[2] );
+        MemberShip memberShip = new MemberShip();
+        for(String[] member : Constants.memberships){
+            if (member[0].equals(dto.getCurrentMemberShip().getCodeMembership())) {
+                memberShip.setActive(dto.getCurrentMemberShip().isActive());
+                memberShip.setName(member[1]);
+                memberShip.setDescription(member[2]);
             }
         }
-        return repository.save( new Administrator(dto.getEmail(), dto.getName(), dto.getPhoneNumber(), dto.getUsername(), dto.getPassword(), dto.getSearchRecord(), ms) );
+        return administratorRepository.save(new Administrator(dto.getEmail(), dto.getName(), dto.getUsername(), dto.getPassword(), memberShip));
     }
 
     @Override
-    public boolean deleteAdministrator(String email) {
-        boolean deleted = repository.existsById( email );
-        if( deleted ){ repository.deleteById( email ); }else{throw new AdministratorNotFoundException();}
-        return deleted;
+    public Administrator updateAdministrator(AdministratorDto dto, String email) {
+        if(administratorRepository.findById(email).isPresent()){
+            Administrator administrator = administratorRepository.findById(email).get();
+            administrator.update(dto);
+            administratorRepository.save(administrator);
+            return administrator;
+        }
+        return null;
     }
 }
