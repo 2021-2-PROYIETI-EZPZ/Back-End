@@ -22,14 +22,21 @@ public class Administrator {
 
     private String password;
 
+    private String[] searchRecord;
+
+    private MemberShip memberShip;
+
     public Administrator() { }
 
-    public Administrator(String email, String name, String phoneNumber, String username, String password) {
+    public Administrator(String email, String name, String phoneNumber, String username, String password, String[] searchRecord, MemberShip memberShip) {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+
+        this.searchRecord = searchRecord;
+        this.memberShip = memberShip;
     }
 
     public String getEmail() {
@@ -70,5 +77,21 @@ public class Administrator {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String[] getSearchRecord() {
+        return searchRecord;
+    }
+
+    public void setSearchRecord(String[] searchRecord) {
+        this.searchRecord = searchRecord;
+    }
+
+    public MemberShip getMemberShip() {
+        return memberShip;
+    }
+
+    public void setMemberShip(MemberShip memberShip) {
+        this.memberShip = memberShip;
     }
 }
