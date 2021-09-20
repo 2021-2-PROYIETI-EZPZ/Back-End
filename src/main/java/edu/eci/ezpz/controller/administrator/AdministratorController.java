@@ -4,7 +4,7 @@ import edu.eci.ezpz.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping( "/v1/administrator" )
+@RequestMapping( "/v1/admin" )
 public class AdministratorController {
 
     @Autowired
