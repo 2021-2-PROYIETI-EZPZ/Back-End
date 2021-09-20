@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.*;
 public class AdministratorController {
 
     @Autowired
-    private AdministratorService service;
+    private AdministratorService administratorService;
 
     @PostMapping
     public Administrator createAdministrator(@RequestBody AdministratorDto dto){
-        return service.createAdministrator( dto );
+        return administratorService.createAdministrator(dto);
     }
 
-    @DeleteMapping("/{email}")
-    public boolean deleteAdministrator( @PathVariable String email ){
-        return service.deleteAdministrator( email );
+    @PutMapping("/{email}")
+    public Administrator updateAdministrator(@RequestBody AdministratorDto dto, @PathVariable String email){
+        return administratorService.updateAdministrator(dto, email);
     }
 }
