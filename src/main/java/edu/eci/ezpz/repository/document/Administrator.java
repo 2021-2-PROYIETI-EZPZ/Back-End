@@ -1,10 +1,9 @@
 package edu.eci.ezpz.repository.document;
-
+import edu.eci.ezpz.controller.administrator.AdministratorDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 @Document
 public class Administrator {
 
@@ -15,28 +14,24 @@ public class Administrator {
     private String name;
 
     @Indexed( unique = true )
-    private String phoneNumber;
-
-    @Indexed( unique = true )
     private String username;
-
-    private String password;
-
-    private String[] searchRecord;
 
     private MemberShip memberShip;
 
-    public Administrator() { }
+    private String password;
 
-    public Administrator(String email, String name, String phoneNumber, String username, String password, String[] searchRecord, MemberShip memberShip) {
+    public Administrator(String email, String name, String username, String password, MemberShip memberShip) {
         this.email = email;
         this.name = name;
-        this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
-
-        this.searchRecord = searchRecord;
         this.memberShip = memberShip;
+        this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+    }
+
+    public void update(AdministratorDto dto) {
+        this.name = dto.getName();
+        this.email = dto.getEmail();
+        this.username = dto.getUsername();
     }
 
     public String getEmail() {
@@ -55,14 +50,6 @@ public class Administrator {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -71,27 +58,19 @@ public class Administrator {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String[] getSearchRecord() {
-        return searchRecord;
-    }
-
-    public void setSearchRecord(String[] searchRecord) {
-        this.searchRecord = searchRecord;
-    }
-
     public MemberShip getMemberShip() {
         return memberShip;
     }
 
     public void setMemberShip(MemberShip memberShip) {
         this.memberShip = memberShip;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
