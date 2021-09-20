@@ -1,26 +1,20 @@
 package edu.eci.ezpz.controller.administrator;
-
 import edu.eci.ezpz.controller.client.CurrentMemberShip;
-
 public class AdministratorDto {
 
     private String email;
     private String name;
-    private String phoneNumber;
     private String username;
     private String password;
-    private String[] searchRecord;
+    private String linkPage;
     private CurrentMemberShip currentMemberShip;
 
     public AdministratorDto() {}
 
-    public AdministratorDto(String email, String name, String phoneNumber, String username, String password, String[] searchRecord, CurrentMemberShip currentMemberShip) {
+    public AdministratorDto(String email, String name, String username, String password, CurrentMemberShip currentMemberShip) {
         this.email = email;
         this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.username = username;
         this.password = password;
-        this.searchRecord = searchRecord;
         this.currentMemberShip = currentMemberShip;
     }
 
@@ -40,14 +34,6 @@ public class AdministratorDto {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -64,12 +50,12 @@ public class AdministratorDto {
         this.password = password;
     }
 
-    public String[] getSearchRecord() {
-        return searchRecord;
+    public String getLinkPage() {
+        return linkPage;
     }
 
-    public void setSearchRecord(String[] searchRecord) {
-        this.searchRecord = searchRecord;
+    public void setLinkPage(String linkPage) {
+        this.linkPage = linkPage;
     }
 
     public CurrentMemberShip getCurrentMemberShip() {
