@@ -10,6 +10,8 @@ import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -37,6 +39,26 @@ public class ClientServiceImpl implements ClientService {
         boolean deleted = repository.existsById( email );
         if( deleted ){ repository.deleteById( email ); }else{throw new ClientNotFoundException();}
         return deleted;
+    }
+
+    @Override
+    public boolean updateClient(ClientDto dto, String email) {
+        if ( repository.findById(email).isPresent() )
+        {
+            Client client = repository.findById( email ).get();
+            client.update( dto );
+            repository.save( client );
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    @Override
+    public List<Client> all() {
+        return repository.findAll();
     }
 
 

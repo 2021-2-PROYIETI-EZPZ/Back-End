@@ -1,5 +1,7 @@
 package edu.eci.ezpz.repository.document;
 
+import edu.eci.ezpz.controller.client.ClientDto;
+import edu.eci.ezpz.utils.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -93,5 +95,24 @@ public class Client {
 
     public void setMemberShip(MemberShip memberShip) {
         this.memberShip = memberShip;
+    }
+
+    public void update(ClientDto dto) {
+        //this.email= dto.getEmail();
+        this.name = dto.getName();
+        this.phoneNumber = dto.getPhoneNumber();
+        this.username = dto.getUsername();
+        this.password = BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() );
+
+        this.searchRecord = dto.getSearchRecord();
+        MemberShip ms1 =  new MemberShip();
+        for( String[] m : Constants.memberships ){
+            if( m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
+                ms1.setActive( dto.getCurrentMemberShip().isActive() );
+                ms1.setName( m[1] );
+                ms1.setDescription( m[2] );
+            }
+        }
+        this.memberShip = ms1;
     }
 }
