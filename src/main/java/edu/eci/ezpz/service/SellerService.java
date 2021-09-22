@@ -11,4 +11,6 @@ public interface SellerService {
     Seller createSeller(SellerDto dto) throws IOException;
 
     Seller updateSeller(SellerDto dto, String email);
+
+    public boolean deleteSeller( String email);
 }

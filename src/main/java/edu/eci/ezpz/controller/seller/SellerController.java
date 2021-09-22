@@ -5,7 +5,6 @@ import edu.eci.ezpz.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @RestController
@@ -25,4 +24,8 @@ public class SellerController {
         return sellerService.updateSeller(dto, email);
     }
 
+    @DeleteMapping("/{email}")
+    public boolean deleteSeller(@PathVariable String email){
+        return sellerService.deleteSeller(email);
+    }
 }

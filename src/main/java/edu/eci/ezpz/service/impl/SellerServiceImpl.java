@@ -1,6 +1,7 @@
 package edu.eci.ezpz.service.impl;
 
 import edu.eci.ezpz.controller.seller.SellerDto;
+import edu.eci.ezpz.exception.ClientNotFoundException;
 import edu.eci.ezpz.exception.SellerNotFoundException;
 import edu.eci.ezpz.repository.SellerRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
@@ -24,15 +25,6 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Seller createSeller(SellerDto dto) throws IOException {
-        //MemberShip memberShip = new MemberShip();
-        /*
-        for(String[] member : Constants.memberships){
-            if (member[0].equals(dto.getCurrentMemberShip().getCodeMembership())) {
-                memberShip.setActive(dto.getCurrentMemberShip().isActive());
-                memberShip.setName(member[1]);
-                memberShip.setDescription(member[2]);
-            }
-        }*/
         File file = new File("./"+dto.getNameFile());
         byte[] data = Base64.getDecoder().decode(dto.getFileHash());
 
@@ -88,6 +80,17 @@ public class SellerServiceImpl implements SellerService {
             return seller;
         }
         return null;
+    }
+
+    @Override
+    public boolean deleteSeller(String email){
+        boolean sellDeleted = sellerRepository.existsById( email );
+        if( sellDeleted ){
+            sellerRepository.deleteById( email ); }
+        else{
+            throw new SellerNotFoundException();}
+        return sellDeleted;
+
     }
 
 }
