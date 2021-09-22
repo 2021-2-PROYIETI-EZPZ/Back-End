@@ -5,6 +5,9 @@ import edu.eci.ezpz.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 @RestController
 @RequestMapping( "/v1/seller" )
 public class SellerController {
@@ -13,7 +16,7 @@ public class SellerController {
     private SellerService sellerService;
 
     @PostMapping
-    public Seller createSeller(@RequestBody SellerDto dto){
+    public Seller createSeller(@RequestBody SellerDto dto) throws IOException {
         return sellerService.createSeller( dto );
     }
 

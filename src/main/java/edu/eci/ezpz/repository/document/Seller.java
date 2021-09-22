@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.ArrayList;
+
 @Document
 public class Seller {
 
@@ -21,17 +23,23 @@ public class Seller {
 
     private String linkPage;
 
-    private MemberShip memberShip;
+    //private MemberShip memberShip;
 
     private String password;
 
-    public Seller(String email, String name, String username, String password, String linkPage, MemberShip memberShip) {
+    //private Product[] product;
+
+    private ArrayList<Product> product;
+
+
+    public Seller(String email, String name, String username, String password, String linkPage, ArrayList<Product> product) {
         this.email = email;
         this.name = name;
         this.username = username;
         this.linkPage = linkPage;
-        this.memberShip = memberShip;
+        //this.memberShip = memberShip;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        this.product = product;
     }
 
     public String getEmail() {
@@ -66,13 +74,13 @@ public class Seller {
         this.linkPage = linkPage;
     }
 
-    public MemberShip getMemberShip() {
+    /**public MemberShip getMemberShip() {
         return memberShip;
     }
 
     public void setMemberShip(MemberShip memberShip) {
         this.memberShip = memberShip;
-    }
+    }**/
 
     public String getPassword() {
         return password;
@@ -82,10 +90,19 @@ public class Seller {
         this.password = password;
     }
 
+    public ArrayList<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(ArrayList<Product> product) {
+        this.product = product;
+    }
+
     public void update(SellerDto dto) {
         this.name = dto.getName();
         this.linkPage = dto.getLinkPage();
         this.email = dto.getEmail();
         this.username = dto.getUsername();
     }
+
 }
