@@ -10,6 +10,8 @@ import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SellerServiceImpl implements SellerService {
 
@@ -41,4 +43,18 @@ public class SellerServiceImpl implements SellerService {
         return null;
     }
 
+    @Override
+    public Seller findByEmail(String email )
+            throws SellerNotFoundException
+    {
+        Optional<Seller> optionalSeller = sellerRepository.findByEmail( email );
+        if ( optionalSeller.isPresent() )
+        {
+            return optionalSeller.get();
+        }
+        else
+        {
+            throw new SellerNotFoundException();
+        }
+    }
 }

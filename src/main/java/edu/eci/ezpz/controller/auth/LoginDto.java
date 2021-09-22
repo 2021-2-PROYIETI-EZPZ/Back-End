@@ -2,8 +2,8 @@ package edu.eci.ezpz.controller.auth;
 
 public class LoginDto
 {
-    private String email;
-    private String password;
+    String email;
+    String password;
 
     public LoginDto(String email, String password)
     {

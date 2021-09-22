@@ -8,8 +8,8 @@ import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.AdministratorService;
 import edu.eci.ezpz.service.ClientService;
 import edu.eci.ezpz.service.SellerService;
-import static edu.eci.ezpz.utils.Constants.CLAIMS_ROLES_KEY;
-import static edu.eci.ezpz.utils.Constants.TOKEN_DURATION_MINUTES;
+import static edu.eci.ezpz.utils.Tokens.CLAIMS_ROLES_KEY;
+import static edu.eci.ezpz.utils.Tokens.TOKEN_DURATION_MINUTES;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class AuthController
     {
         Seller seller = sellerService.findByEmail(loginDto.email);
 
-        if (BCrypt.checkpw(loginDto.password, seller.getPasswordHash()))
+        if (BCrypt.checkpw(loginDto.password, seller.getPassword()))
         {
             return generateTokenDto(seller);
         }
@@ -62,7 +62,7 @@ public class AuthController
     public TokenDto loginClient(@RequestBody LoginDto loginDto)
     {
         Client client = clientService.findByEmail(loginDto.email);
-        if (BCrypt.checkpw(loginDto.password, seller.getPasswordHash()))
+        if (BCrypt.checkpw(loginDto.password, client.getPassword()))
         {
             return generateTokenDto(client);
         }
@@ -77,7 +77,7 @@ public class AuthController
     public TokenDto loginAdministrator(@RequestBody LoginDto loginDto)
     {
         Administrator administrator = administratorService.findByEmail(loginDto.email);
-        if (BCrypt.checkpw(loginDto.password, seller.getPasswordHash()))
+        if (BCrypt.checkpw(loginDto.password, administrator.getPassword()))
         {
             return generateTokenDto(administrator);
         }
@@ -91,7 +91,7 @@ public class AuthController
     private String generateToken(Seller seller, Date expirationDate)
     {
         return Jwts.builder()
-                .setSubject(seller.getId())
+                .setSubject(seller.getEmail())
                 .claim(CLAIMS_ROLES_KEY, seller)
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)
@@ -110,7 +110,7 @@ public class AuthController
     private String generateToken(Client client, Date expirationDate)
     {
         return Jwts.builder()
-                .setSubject(client.getId())
+                .setSubject(client.getEmail())
                 .claim(CLAIMS_ROLES_KEY, client)
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)
@@ -129,7 +129,7 @@ public class AuthController
     private String generateToken(Administrator administrator, Date expirationDate)
     {
         return Jwts.builder()
-                .setSubject(administrator.getId())
+                .setSubject(administrator.getEmail())
                 .claim(CLAIMS_ROLES_KEY, administrator)
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)

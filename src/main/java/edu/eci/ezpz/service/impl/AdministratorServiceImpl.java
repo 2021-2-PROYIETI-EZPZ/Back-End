@@ -1,5 +1,6 @@
 package edu.eci.ezpz.service.impl;
 import edu.eci.ezpz.controller.administrator.AdministratorDto;
+import edu.eci.ezpz.exception.AdministratorNotFoundException;
 import edu.eci.ezpz.repository.AdministratorRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.repository.document.Administrator;
@@ -7,6 +8,9 @@ import edu.eci.ezpz.service.AdministratorService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
 
@@ -35,5 +39,20 @@ public class AdministratorServiceImpl implements AdministratorService {
             return administrator;
         }
         return null;
+    }
+
+    @Override
+    public Administrator findByEmail( String email )
+            throws AdministratorNotFoundException
+    {
+        Optional<Administrator> optionalAdministrator = administratorRepository.findByEmail( email );
+        if ( optionalAdministrator.isPresent() )
+        {
+            return optionalAdministrator.get();
+        }
+        else
+        {
+            throw new AdministratorNotFoundException();
+        }
     }
 }

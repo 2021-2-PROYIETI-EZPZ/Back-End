@@ -10,6 +10,8 @@ import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -39,5 +41,18 @@ public class ClientServiceImpl implements ClientService {
         return deleted;
     }
 
-
+    @Override
+    public Client findByEmail(String email )
+            throws ClientNotFoundException
+    {
+        Optional<Client> optionalClient = repository.findByEmail( email );
+        if ( optionalClient.isPresent() )
+        {
+            return optionalClient.get();
+        }
+        else
+        {
+            throw new ClientNotFoundException();
+        }
+    }
 }
