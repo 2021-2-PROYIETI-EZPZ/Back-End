@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d15660ff-5bb5-4507-8874-714dbac5b41d",
+		"_postman_id": "7c21d14f-97d2-46eb-95c9-9cb73d7046ac",
 		"name": "EZPZ Client",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -174,6 +174,80 @@
 								"v1",
 								"membership",
 								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMemberShip()",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"name\": \"Notificaciones de vendedor modificado\",\r\n    \"codeMembership\": \"MEM_01\",\r\n    \"description\":  \"(Ahora solo dura un mes) El sistema notifica al usuario sobre las nuevas actualizaciones de sus vendedores favoritos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/membership/MEM_01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMemberShip()",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/membership/MEM_01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllMemberShip()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/membership",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership"
 							]
 						}
 					},
