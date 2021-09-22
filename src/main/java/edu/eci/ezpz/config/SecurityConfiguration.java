@@ -28,14 +28,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     {
         http.addFilterBefore( jwtRequestFilter, BasicAuthenticationFilter.class ).cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/v1/health").permitAll()
-                .antMatchers(HttpMethod.POST, "/v1/auth" ).permitAll()
-                .antMatchers(HttpMethod.POST,"/newProduct" ).hasRole("SELLER")
-                .antMatchers(HttpMethod.PUT,"/newProduct" ).hasRole("SELLER")
-                .antMatchers(HttpMethod.DELETE,"/newProduct" ).hasRole("SELLER")
-                .antMatchers(HttpMethod.POST,"/newSeller" ).hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,"/newSeller" ).hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE,"/newSeller" ).hasRole("ADMIN")
+                /*Security configuration Client*/
+                .antMatchers(HttpMethod.GET,"/v1/client" ).hasRole("CLIENT")
+                .antMatchers(HttpMethod.POST,"/v1/client" ).hasRole("CLIENT")
+                .antMatchers(HttpMethod.PUT,"/v1/client/" ).hasRole("CLIENT")
+                .antMatchers(HttpMethod.DELETE,"/v1/client/" ).hasRole("CLIENT")
+                /*Security configuration Seller*/
+                .antMatchers(HttpMethod.GET,"/v1/seller" ).hasRole("SELLER")
+                .antMatchers(HttpMethod.POST,"/v1/seller" ).hasRole("SELLER")
+                .antMatchers(HttpMethod.PUT,"/v1/seller/" ).hasRole("SELLER")
+                .antMatchers(HttpMethod.DELETE,"/v1/seller" ).hasRole("SELLER")
+                /*Security configuration Administrator - Membership*/
+                .antMatchers(HttpMethod.GET,"/v1/membership" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/v1/membership/" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/v1/membership" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/v1/membership/" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/v1/membership/" ).hasRole("ADMIN")
+                /*Security configuration Administrator*/
+                .antMatchers(HttpMethod.GET,"/v1/admin" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/v1/admin/" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/v1/admin" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/v1/admin/" ).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/v1/admin/" ).hasRole("ADMIN")
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS );
     }
