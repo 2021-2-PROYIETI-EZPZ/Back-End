@@ -18,8 +18,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers( HttpMethod.GET, "/" ).permitAll()
-                .antMatchers( HttpMethod.POST,"/" ).permitAll()
+                .antMatchers( HttpMethod.GET, "/products" ).permitAll()
+                .antMatchers( HttpMethod.POST,"/register" ).permitAll()
+                .antMatchers( HttpMethod.POST,"/newProduct" ).hasRole("SELLER")
+                .antMatchers( HttpMethod.POST,"/newSeller" ).hasRole("ADMINISTRATOR")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
