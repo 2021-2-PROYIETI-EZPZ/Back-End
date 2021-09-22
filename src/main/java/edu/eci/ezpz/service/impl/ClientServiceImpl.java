@@ -21,11 +21,15 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository repository;
 
 
+
+
     @Override
     public Client createClient(ClientDto dto) {
         MemberShip ms =  new MemberShip();
         for( String[] m : Constants.memberships ){
-            if( m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
+
+            if(dto.getCurrentMemberShip()!=null && m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
+                System.out.println( "entra");
                 ms.setActive( dto.getCurrentMemberShip().isActive() );
                 ms.setName( m[1] );
                 ms.setDescription( m[2] );

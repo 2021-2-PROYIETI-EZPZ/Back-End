@@ -8,6 +8,7 @@ import edu.eci.ezpz.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @RestController
@@ -19,11 +20,20 @@ public class MembershipController {
     public MemberShip createMemberShip(@RequestBody MemberShip dto){
         return service.createMembership( dto );
     }
+
+    @GetMapping
+    public List<MemberShip> findAllMemberShips(){ return service.findAllMemberShips(); }
+
     @GetMapping("/{id}")
     public MemberShip findByIdMembership(@PathVariable String id)
     {
         return service.findById(id);
     }
 
+    @PutMapping( "/{id}" )
+    public MemberShip updateMemberShip( @PathVariable String id, @RequestBody MemberShip ms ){ return service.updateMemberShip( ms, id ); }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteMemberShipById( @PathVariable String id ){ return service.deleteById( id ); }
 
 }
