@@ -23,11 +23,7 @@ public class Seller {
 
     private String linkPage;
 
-    //private MemberShip memberShip;
-
     private String password;
-
-    //private Product[] product;
 
     private ArrayList<Product> product;
 
@@ -37,7 +33,7 @@ public class Seller {
         this.name = name;
         this.username = username;
         this.linkPage = linkPage;
-        //this.memberShip = memberShip;
+
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
         this.product = product;
     }
@@ -73,14 +69,6 @@ public class Seller {
     public void setLinkPage(String linkPage) {
         this.linkPage = linkPage;
     }
-
-    /**public MemberShip getMemberShip() {
-        return memberShip;
-    }
-
-    public void setMemberShip(MemberShip memberShip) {
-        this.memberShip = memberShip;
-    }**/
 
     public String getPassword() {
         return password;

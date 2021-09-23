@@ -2,6 +2,7 @@ package edu.eci.ezpz.repository.document;
 
 public class Product {
 
+    private String idProduct;
     private String nameProduct;
     private String priceProduct;
     private String descriptionProduct;
@@ -9,11 +10,20 @@ public class Product {
 
     public Product() {}
 
-    public Product(String nameProduct, String priceProduct, String descriptionProduct, String urlProduct) {
+    public Product(String idProduct, String nameProduct, String priceProduct, String descriptionProduct, String urlProduct) {
+        this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.priceProduct = priceProduct;
         this.descriptionProduct = descriptionProduct;
         this.urlProduct = urlProduct;
+    }
+
+    public String getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(String idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getNameProduct() {

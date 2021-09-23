@@ -11,7 +11,6 @@ public class SellerDto {
     private String username;
     private String password;
     private String linkPage;
-    //private CurrentMemberShip currentMemberShip;
     private String fileHash;
     private String nameFile;
 

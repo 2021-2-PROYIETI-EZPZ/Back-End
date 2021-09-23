@@ -25,9 +25,13 @@ public class SellerServiceImpl implements SellerService {
 
     @Override
     public Seller createSeller(SellerDto dto) throws IOException {
+        ArrayList<Product> products = convertToArray(dto);
+        return sellerRepository.save(new Seller(dto.getEmail(), dto.getName(), dto.getUsername(), dto.getPassword(), dto.getLinkPage(), products));
+    }
+
+    public ArrayList<Product> convertToArray(SellerDto dto) throws IOException {
         File file = new File("./"+dto.getNameFile());
         byte[] data = Base64.getDecoder().decode(dto.getFileHash());
-
         try (OutputStream stream = new FileOutputStream(file)) {
             stream.write(data);
         } catch (FileNotFoundException e) {
@@ -37,6 +41,7 @@ public class SellerServiceImpl implements SellerService {
         }
         BufferedReader br = new BufferedReader(new FileReader(dto.getNameFile()));
         String line = null;
+        String idProduct;
         String nameProduct;
         String priceProduct;
         String descriptionProduct;
@@ -49,15 +54,18 @@ public class SellerServiceImpl implements SellerService {
             for (String str : values) {
                 count += 1;
                 if (count == 1) {
+                    idProduct = str;
+                    product.setIdProduct(idProduct);
+                } else if (count == 2) {
                     nameProduct = str;
                     product.setNameProduct(nameProduct);
-                } else if (count == 2) {
+                } else if (count == 3) {
                     priceProduct = str;
                     product.setPriceProduct(priceProduct);
-                } else if (count == 3) {
+                } else if (count == 4) {
                     descriptionProduct = str;
                     product.setDescriptionProduct(descriptionProduct);
-                } else if (count == 4) {
+                } else if (count == 5) {
                     urlProduct = str;
                     product.setUrlProduct(urlProduct);
                 }
@@ -67,7 +75,8 @@ public class SellerServiceImpl implements SellerService {
         products.remove(0);
         br.close();
         file.delete();
-        return sellerRepository.save(new Seller(dto.getEmail(), dto.getName(), dto.getUsername(), dto.getPassword(), dto.getLinkPage(), products));
+
+        return products;
     }
 
     @Override
@@ -81,7 +90,7 @@ public class SellerServiceImpl implements SellerService {
         }
         return null;
     }
-
+    
     @Override
     public boolean deleteSeller(String email){
         boolean sellDeleted = sellerRepository.existsById( email );
