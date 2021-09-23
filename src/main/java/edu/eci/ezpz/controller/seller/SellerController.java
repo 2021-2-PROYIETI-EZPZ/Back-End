@@ -28,4 +28,9 @@ public class SellerController {
     public boolean deleteSeller(@PathVariable String email){
         return sellerService.deleteSeller(email);
     }
+    @DeleteMapping("/{email}/{id}")
+    public boolean deleteProductSeller(@PathVariable String email, @PathVariable String id) throws IOException {
+        return sellerService.deleteProductSeller( email,id);
+    }
+
 }

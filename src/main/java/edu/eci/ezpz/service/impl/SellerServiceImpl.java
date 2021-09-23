@@ -1,21 +1,19 @@
 package edu.eci.ezpz.service.impl;
 
 import edu.eci.ezpz.controller.seller.SellerDto;
-import edu.eci.ezpz.exception.ClientNotFoundException;
+import edu.eci.ezpz.exception.ProductoNotFoundException;
 import edu.eci.ezpz.exception.SellerNotFoundException;
 import edu.eci.ezpz.repository.SellerRepository;
-import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.repository.document.Product;
 import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.SellerService;
-import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -100,6 +98,38 @@ public class SellerServiceImpl implements SellerService {
             throw new SellerNotFoundException();}
         return sellDeleted;
 
+    }
+
+    @Override
+    public boolean deleteProductSeller(String email, String id) {
+        System.out.println("F");
+        Optional<Seller> seller = sellerRepository.findByEmail(email);
+        if (seller.isPresent()) {
+            deleteThisProduct(seller.get(), id);
+        }
+        else{
+            throw new SellerNotFoundException();
+        }
+        return true;
+    }
+
+        private void deleteThisProduct(Seller seller,String idProduct){
+        boolean exception= false;
+        ArrayList<Product> products= seller.getProduct();
+        int count=0;
+        for (Product p : products){
+            if(p.getIdProduct().equals(idProduct)){
+                products.remove(count);
+                exception= true;
+                break;
+            }
+            count++;
+        }
+        if(!exception){
+            throw new ProductoNotFoundException();
+        }
+        seller.setProduct(products);
+        sellerRepository.save(seller);
     }
 
 }

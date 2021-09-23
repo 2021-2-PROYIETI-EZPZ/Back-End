@@ -3,7 +3,6 @@ package edu.eci.ezpz.service;
 import edu.eci.ezpz.controller.seller.SellerDto;
 import edu.eci.ezpz.repository.document.Seller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface SellerService {
@@ -13,4 +12,8 @@ public interface SellerService {
     Seller updateSeller(SellerDto dto, String email) throws IOException;
 
     public boolean deleteSeller( String email);
+
+    boolean deleteProductSeller(String email, String id) throws IOException;
+
+
 }
