@@ -1,9 +1,12 @@
 package edu.eci.ezpz.service;
 
 import edu.eci.ezpz.controller.seller.SellerDto;
+import edu.eci.ezpz.repository.document.Product;
 import edu.eci.ezpz.repository.document.Seller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public interface SellerService {
 
@@ -15,5 +18,6 @@ public interface SellerService {
 
     boolean deleteProductSeller(String email, String id) throws IOException;
 
+    ArrayList<Product> getProductsByEmail(String email) throws IOException;
 
 }
