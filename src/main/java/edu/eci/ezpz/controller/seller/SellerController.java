@@ -1,11 +1,13 @@
 package edu.eci.ezpz.controller.seller;
 
+import edu.eci.ezpz.repository.document.Product;
 import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping( "/v1/seller" )
@@ -27,5 +29,10 @@ public class SellerController {
     @DeleteMapping("/{email}")
     public boolean deleteSeller(@PathVariable String email){
         return sellerService.deleteSeller(email);
+    }
+
+    @GetMapping("/{email}")
+    public ArrayList<Product> getProductsByEmail (@PathVariable String email) throws IOException {
+        return sellerService.getProductsByEmail(email);
     }
 }

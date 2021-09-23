@@ -16,6 +16,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -100,6 +101,17 @@ public class SellerServiceImpl implements SellerService {
             throw new SellerNotFoundException();}
         return sellDeleted;
 
+    }
+
+    @Override
+    public ArrayList<Product> getProductsByEmail(String email) throws IOException {
+        Seller seller = sellerRepository.findById(email).get();
+        if(sellerRepository.findById(email).isPresent()){
+            ArrayList<Product> products;
+            products = seller.getProduct();
+            return products;
+        }
+        return null;
     }
 
 }
