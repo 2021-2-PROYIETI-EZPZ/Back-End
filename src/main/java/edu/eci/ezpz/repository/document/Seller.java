@@ -86,11 +86,12 @@ public class Seller {
         this.product = product;
     }
 
-    public void update(SellerDto dto) {
+    public void update(SellerDto dto, ArrayList<Product> products) {
         this.name = dto.getName();
         this.linkPage = dto.getLinkPage();
         this.email = dto.getEmail();
         this.username = dto.getUsername();
+        this.product = products;
     }
 
 }

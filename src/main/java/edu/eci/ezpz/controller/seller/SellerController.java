@@ -20,7 +20,7 @@ public class SellerController {
     }
 
     @PutMapping("/{email}")
-    public Seller updateSeller(@RequestBody SellerDto dto, @PathVariable String email){
+    public Seller updateSeller(@RequestBody SellerDto dto, @PathVariable String email) throws IOException {
         return sellerService.updateSeller(dto, email);
     }
 

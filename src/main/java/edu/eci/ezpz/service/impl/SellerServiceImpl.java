@@ -80,17 +80,17 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller updateSeller(SellerDto dto, String email) {
-
+    public Seller updateSeller(SellerDto dto, String email) throws IOException {
         if(sellerRepository.findById(email).isPresent()){
             Seller seller = sellerRepository.findById(email).get();
-            seller.update(dto);
+            ArrayList<Product> products = convertToArray(dto);
+            seller.update(dto, products);
             sellerRepository.save(seller);
             return seller;
         }
         return null;
     }
-    
+
     @Override
     public boolean deleteSeller(String email){
         boolean sellDeleted = sellerRepository.existsById( email );

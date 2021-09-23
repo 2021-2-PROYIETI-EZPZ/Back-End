@@ -10,7 +10,7 @@ public interface SellerService {
 
     Seller createSeller(SellerDto dto) throws IOException;
 
-    Seller updateSeller(SellerDto dto, String email);
+    Seller updateSeller(SellerDto dto, String email) throws IOException;
 
     public boolean deleteSeller( String email);
 }
