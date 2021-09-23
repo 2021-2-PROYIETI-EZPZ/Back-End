@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "b9377f75-11aa-47b2-b397-1c46994a5a4b",
+		"name": "EZPZ_CRUD_Administrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createAdministrator",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"adminietiezpz@gmail.com\",\r\n    \"name\":\"Administrator\",\r\n    \"username\":\"admin\",\r\n    \"password\":\"ezpz2021*\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_03\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ezpz/v1/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ezpz",
+						"v1",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAdministrator",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"adminietiezpz@gmail.com\",\r\n    \"name\":\"Administrator2\",\r\n    \"username\":\"admin2\",\r\n    \"password\":\"ezpz2021*\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_03\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ezpz/v1/admin/adminietiezpz@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ezpz",
+						"v1",
+						"admin",
+						"adminietiezpz@gmail.com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
