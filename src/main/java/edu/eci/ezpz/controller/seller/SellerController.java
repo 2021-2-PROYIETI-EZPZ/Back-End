@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping( "/v1/seller" )
 public class SellerController {
 
