@@ -4,6 +4,7 @@ import edu.eci.ezpz.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping( "/v1/admin" )
 public class AdministratorController {
 

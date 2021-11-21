@@ -12,6 +12,7 @@ import java.lang.reflect.Member;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping( "/v1/membership" )
 public class MembershipController {
     @Autowired
