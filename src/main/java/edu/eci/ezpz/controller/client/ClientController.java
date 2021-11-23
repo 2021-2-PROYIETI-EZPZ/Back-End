@@ -2,10 +2,13 @@ package edu.eci.ezpz.controller.client;
 
 
 import edu.eci.ezpz.repository.document.Client;
+import edu.eci.ezpz.repository.document.Product;
 import edu.eci.ezpz.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,10 @@ public class ClientController {
     @PutMapping("/{email}")
     public boolean updateClient( @RequestBody ClientDto dto, @PathVariable String email){
         return service.updateClient( dto,email );
+    }
+    @GetMapping("/{email}/{password}")
+    public boolean getClientByEmail (@PathVariable String email,@PathVariable String password) throws IOException {
+        return service.getClientByEmail(email);
     }
     @GetMapping
     public List<Client> all()

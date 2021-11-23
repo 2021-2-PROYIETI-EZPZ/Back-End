@@ -5,11 +5,15 @@ import edu.eci.ezpz.exception.ClientNotFoundException;
 import edu.eci.ezpz.repository.ClientRepository;
 import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.repository.document.MemberShip;
+import edu.eci.ezpz.repository.document.Product;
+import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.ClientService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,7 +63,14 @@ public class ClientServiceImpl implements ClientService {
         }
 
     }
-
+    @Override
+    public boolean getClientByEmail(String email) throws IOException {
+        Client cliente= repository.findById(email).get();
+        if(repository.findById(email).isPresent()){
+            System.out.println(cliente.getPassword());
+        }
+        return true;
+    }
     @Override
     public List<Client> all() {
         return repository.findAll();
