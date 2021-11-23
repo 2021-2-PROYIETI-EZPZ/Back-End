@@ -93,7 +93,7 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
                 String itemUrl = "https://www.linio.com.co"+e.select("a.col-12.pl-0.pr-0").attr("href");
                 String price = e.select("span.price-main-md").get(0).ownText();
                 String title = e.select("span.title-section").get(0).ownText();
-                String site = "AliExpress";
+                String site = "Ilinio";
                 product.setTitle(title);
                 product.setPrice(price);
                 product.setSite(site);
