@@ -1,6 +1,5 @@
 package edu.eci.ezpz.controller.auth;
 
-
 import edu.eci.ezpz.exception.InvalidCredentialsException;
 import edu.eci.ezpz.repository.User;
 import edu.eci.ezpz.repository.document.Administrator;
@@ -14,7 +13,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;

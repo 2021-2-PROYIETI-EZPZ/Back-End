@@ -1,5 +1,6 @@
 package edu.eci.ezpz.controller.administrator;
 import edu.eci.ezpz.controller.client.CurrentMemberShip;
+
 public class AdministratorDto {
 
     private String email;

@@ -1,11 +1,9 @@
 package edu.eci.ezpz.controller.client;
 
-
 import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

@@ -1,13 +1,10 @@
 package edu.eci.ezpz.service.impl;
 import edu.eci.ezpz.controller.administrator.AdministratorDto;
-import edu.eci.ezpz.controller.auth.LoginDto;
 import edu.eci.ezpz.exception.AdministratorNotFoundException;
 import edu.eci.ezpz.exception.SellerNotFoundException;
-import edu.eci.ezpz.exception.AdministratorNotFoundException;
 import edu.eci.ezpz.repository.AdministratorRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.repository.document.Administrator;
-import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.AdministratorService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
