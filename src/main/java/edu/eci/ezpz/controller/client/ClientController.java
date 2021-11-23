@@ -36,7 +36,7 @@ public class ClientController {
     }
     @GetMapping("/login")
     public boolean getClientByEmail (@RequestParam("email") String email,@RequestParam("password") String password) throws IOException {
-        return service.getClientByEmail(email);
+        return service.getClientByEmail(email,password);
     }
     @GetMapping
     public List<Client> all()

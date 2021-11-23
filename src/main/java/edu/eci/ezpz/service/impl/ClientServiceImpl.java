@@ -10,6 +10,7 @@ import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.ClientService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -64,12 +65,21 @@ public class ClientServiceImpl implements ClientService {
 
     }
     @Override
-    public boolean getClientByEmail(String email) throws IOException {
+    public boolean getClientByEmail(String email, String password) throws IOException {
+        boolean resbool=false;
         Client cliente= repository.findById(email).get();
         if(repository.findById(email).isPresent()){
-            System.out.println(cliente.getPassword());
+            boolean checkpass=BCrypt.checkpw(password,cliente.getPassword());
+            if(checkpass==true)
+            {
+                resbool=true;
+            }
+            else
+            {
+                resbool=false;
+            }
         }
-        return true;
+        return resbool;
     }
     @Override
     public List<Client> all() {

@@ -13,7 +13,7 @@ public interface ClientService {
     public Client createClient(ClientDto dto);
     public boolean deleteClient( String email );
     public boolean updateClient(ClientDto dto, String email);
-    public boolean getClientByEmail(String email) throws IOException;
+    public boolean getClientByEmail(String email,String password) throws IOException;
 
     List<Client> all();
 }

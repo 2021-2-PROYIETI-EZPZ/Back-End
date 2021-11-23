@@ -36,7 +36,6 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
-
         this.searchRecord = searchRecord;
         this.memberShip = memberShip;
     }
