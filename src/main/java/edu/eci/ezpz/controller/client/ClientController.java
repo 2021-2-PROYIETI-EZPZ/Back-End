@@ -34,8 +34,8 @@ public class ClientController {
     public boolean updateClient( @RequestBody ClientDto dto, @PathVariable String email){
         return service.updateClient( dto,email );
     }
-    @GetMapping("/{email}/{password}")
-    public boolean getClientByEmail (@PathVariable String email,@PathVariable String password) throws IOException {
+    @GetMapping("/login")
+    public boolean getClientByEmail (@RequestParam("email") String email,@RequestParam("password") String password) throws IOException {
         return service.getClientByEmail(email);
     }
     @GetMapping
