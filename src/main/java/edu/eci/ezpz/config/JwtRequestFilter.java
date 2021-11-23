@@ -29,15 +29,12 @@ import static edu.eci.ezpz.utils.Constants.CLAIMS_ROLES_KEY;
 import static edu.eci.ezpz.utils.Constants.COOKIE_NAME;
 
 @Component
-public class JwtRequestFilter
-        extends OncePerRequestFilter
+public class JwtRequestFilter extends OncePerRequestFilter
 {
     @Value( "${app.secret}" )
     String secret;
 
-    public JwtRequestFilter()
-    {
-    }
+    public JwtRequestFilter(){}
 
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain )

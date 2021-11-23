@@ -7,6 +7,6 @@ import org.springframework.http.HttpStatus;
 public class SellerNotFoundException extends InternalServerErrorException {
 
     public SellerNotFoundException(){
-        super(new ServerErrorResponseDto("Seller not found", ErrorCodeEnum.CLIENT_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+        super(new ServerErrorResponseDto("Seller not found", ErrorCodeEnum.SELLER_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 }

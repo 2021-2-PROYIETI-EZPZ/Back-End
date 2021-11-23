@@ -1,12 +1,19 @@
 package edu.eci.ezpz.repository.document;
 
+import edu.eci.ezpz.controller.client.ClientDto;
+import edu.eci.ezpz.repository.User;
+import edu.eci.ezpz.utils.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Document
-public class Client {
+public class Client implements User {
 
     @Id
     private String email;
@@ -21,10 +28,12 @@ public class Client {
     private String username;
 
     private String password;
-
+    private String password2;
     private String[] searchRecord;
 
     private MemberShip memberShip;
+
+    private List<RoleEnum> roles;
 
     public Client() { }
 
@@ -34,7 +43,8 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
-
+        this.password2 = password;
+        roles = new ArrayList<>(Collections.singleton(RoleEnum.CLIENT));
         this.searchRecord = searchRecord;
         this.memberShip = memberShip;
     }
@@ -74,6 +84,9 @@ public class Client {
     public String getPassword() {
         return password;
     }
+    public String getPassword2() {
+        return password2;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -94,4 +107,26 @@ public class Client {
     public void setMemberShip(MemberShip memberShip) {
         this.memberShip = memberShip;
     }
+
+    public List<RoleEnum> getRoles() {return roles;}
+
+    public void update(ClientDto dto) {
+        //this.email= dto.getEmail();
+        this.name = dto.getName();
+        this.phoneNumber = dto.getPhoneNumber();
+        this.username = dto.getUsername();
+        this.password = BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() );
+
+        this.searchRecord = dto.getSearchRecord();
+        MemberShip ms1 =  new MemberShip();
+        for( String[] m : Constants.memberships ){
+            if( m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
+                ms1.setActive( dto.getCurrentMemberShip().isActive() );
+                ms1.setName( m[1] );
+                ms1.setDescription( m[2] );
+            }
+        }
+        this.memberShip = ms1;
+    }
 }
+

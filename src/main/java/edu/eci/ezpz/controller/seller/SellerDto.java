@@ -1,6 +1,7 @@
 package edu.eci.ezpz.controller.seller;
 
 import edu.eci.ezpz.controller.client.CurrentMemberShip;
+import edu.eci.ezpz.repository.document.Product;
 import edu.eci.ezpz.repository.document.Seller;
 
 public class SellerDto {
@@ -10,16 +11,19 @@ public class SellerDto {
     private String username;
     private String password;
     private String linkPage;
-    private CurrentMemberShip currentMemberShip;
+    private String fileHash;
+    private String nameFile;
 
     public SellerDto() {}
 
-    public SellerDto(String email, String name, String username, String password, String linkPage, CurrentMemberShip currentMemberShip) {
+    public SellerDto(String email, String name, String username, String password, String linkPage, String fileHash, String fileName) {
         this.email = email;
         this.name = name;
+        this.username = username;
         this.password = password;
         this.linkPage = linkPage;
-        this.currentMemberShip = currentMemberShip;
+        this.fileHash = fileHash;
+        this.nameFile = nameFile;
     }
 
     public String getEmail() {
@@ -37,7 +41,6 @@ public class SellerDto {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getUsername() {
         return username;
@@ -63,11 +66,19 @@ public class SellerDto {
         this.linkPage = linkPage;
     }
 
-    public CurrentMemberShip getCurrentMemberShip() {
-        return currentMemberShip;
+    public String getFileHash() {
+        return fileHash;
     }
 
-    public void setCurrentMemberShip(CurrentMemberShip currentMemberShip) {
-        this.currentMemberShip = currentMemberShip;
+    public void setFileHash(String fileHash) {
+        this.fileHash = fileHash;
+    }
+
+    public String getNameFile() {
+        return nameFile;
+    }
+
+    public void setNameFile(String nameFile) {
+        this.nameFile = nameFile;
     }
 }

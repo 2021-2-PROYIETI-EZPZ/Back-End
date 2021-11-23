@@ -21,6 +21,7 @@ dependencies {
 	implementation 'junit:junit:3.8.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
 }
 
 test {

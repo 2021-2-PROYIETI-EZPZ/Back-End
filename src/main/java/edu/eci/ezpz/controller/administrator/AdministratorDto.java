@@ -16,6 +16,9 @@ public class AdministratorDto {
         this.name = name;
         this.password = password;
         this.currentMemberShip = currentMemberShip;
+        System.out.println("AdministratorDto");
+        System.out.println(this.email);
+        System.out.println(this.password);
     }
 
     public String getEmail() {

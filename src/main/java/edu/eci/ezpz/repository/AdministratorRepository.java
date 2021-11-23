@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface AdministratorRepository extends MongoRepository<Administrator, String > {
-    Optional<Administrator> findByEmail(String email );
+public interface AdministratorRepository extends MongoRepository<Administrator, String >
+{
+    Optional<Administrator> findByEmail(String id);
 }

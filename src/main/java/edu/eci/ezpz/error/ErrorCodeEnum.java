@@ -2,5 +2,8 @@ package edu.eci.ezpz.error;
 
 public enum ErrorCodeEnum {
     CLIENT_NOT_FOUND,
+    SELLER_NOT_FOUND,
+    PRODUCT_NOT_FOUND,
+    MEMBERSHIP_NOT_FOUND,
     INVALID_USER_CREDENTIALS
 }

@@ -1,12 +1,17 @@
 package edu.eci.ezpz.service.impl;
 import edu.eci.ezpz.controller.administrator.AdministratorDto;
+import edu.eci.ezpz.controller.auth.LoginDto;
+import edu.eci.ezpz.exception.AdministratorNotFoundException;
+import edu.eci.ezpz.exception.SellerNotFoundException;
 import edu.eci.ezpz.exception.AdministratorNotFoundException;
 import edu.eci.ezpz.repository.AdministratorRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.repository.document.Administrator;
+import edu.eci.ezpz.repository.document.Seller;
 import edu.eci.ezpz.service.AdministratorService;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +21,15 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Autowired
     private AdministratorRepository administratorRepository;
+
+    public Administrator findByEmail(String email) throws AdministratorNotFoundException
+    {
+        Administrator administrator = null;
+        Optional<Administrator> optionalAdministrator = administratorRepository.findByEmail(email);
+        if(optionalAdministrator.isPresent()) administrator = optionalAdministrator.get();
+        else throw new SellerNotFoundException();
+        return administrator;
+    }
 
     @Override
     public Administrator createAdministrator(AdministratorDto dto) {
@@ -42,17 +56,15 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public Administrator findByEmail( String email )
-            throws AdministratorNotFoundException
-    {
-        Optional<Administrator> optionalAdministrator = administratorRepository.findByEmail( email );
-        if ( optionalAdministrator.isPresent() )
+    public boolean compareCredential(String dtoPassword, String adminPassword) {
+        boolean check = false;
+        if(dtoPassword.equals(adminPassword))
         {
-            return optionalAdministrator.get();
+            check = true;
         }
-        else
-        {
-            throw new AdministratorNotFoundException();
+        else {
+            check = false;
         }
+        return check;
     }
 }

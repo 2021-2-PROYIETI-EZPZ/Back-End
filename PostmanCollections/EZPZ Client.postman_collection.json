@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "d15660ff-5bb5-4507-8874-714dbac5b41d",
+		"name": "EZPZ Client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "CreateClient()",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTM1MzhmMTBkY2JlYjIyZmQxMTY5MWEiLCJhZGFfcm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE2MzEwNjA4NDAsImV4cCI6MTYzMTE0NzI0MH0.oZgTEwSk0jDsWwMCF5C8foztdc1ZXAZhlNe8_NgPrxA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ietiezpz@gmail.com\",\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"300123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_01\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteClient()",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/client/ietiezpz@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"client",
+								"ietiezpz@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getClient()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateClient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"305123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_01\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/client/ietiezpz@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"client",
+								"ietiezpz@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MemberShip",
+			"item": [
+				{
+					"name": "createMemberShip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"name\": \"Notificaciones de vendedor\",\r\n    \"codeMembership\": \"MEM_01\",\r\n    \"description\":  \"El sistema notifica al usuario sobre las nuevas actualizaciones de sus vendedores favoritos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/membership",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByIdMemberShip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/membership/MEM_01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SearchHistory",
+			"item": [
+				{
+					"name": "addHistorySearch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productname\": \"zapatos\",\r\n    \"idclient\": \"pepe@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findSearchHistoryByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ezpz/v1/search/pepe@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"search",
+								"pepe@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -7,6 +7,10 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Document
 public class Seller {
 
@@ -21,16 +25,18 @@ public class Seller {
 
     private String linkPage;
 
-    private MemberShip memberShip;
-
     private String password;
 
-    public Seller(String email, String name, String username, String password, String linkPage, MemberShip memberShip) {
+    private ArrayList<Product> product;
+
+    private List<RoleEnum> roles;
+
+    public Seller(String email, String name, String username, String password, String linkPage) {
         this.email = email;
         this.name = name;
         this.username = username;
         this.linkPage = linkPage;
-        this.memberShip = memberShip;
+        roles = new ArrayList<>(Collections.singleton(RoleEnum.SELLER));
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
     }
 
@@ -66,14 +72,6 @@ public class Seller {
         this.linkPage = linkPage;
     }
 
-    public MemberShip getMemberShip() {
-        return memberShip;
-    }
-
-    public void setMemberShip(MemberShip memberShip) {
-        this.memberShip = memberShip;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -82,10 +80,22 @@ public class Seller {
         this.password = password;
     }
 
-    public void update(SellerDto dto) {
+    public ArrayList<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(ArrayList<Product> product) {
+        this.product = product;
+    }
+
+    public List<RoleEnum> getRoles() {return roles;}
+
+    public void update(SellerDto dto, ArrayList<Product> products) {
         this.name = dto.getName();
         this.linkPage = dto.getLinkPage();
         this.email = dto.getEmail();
         this.username = dto.getUsername();
+        this.product = products;
     }
+
 }

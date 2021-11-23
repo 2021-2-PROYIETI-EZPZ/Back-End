@@ -8,7 +8,7 @@ public class InvalidCredentialsException extends InternalServerErrorException
 {
     public InvalidCredentialsException()
     {
-        super( new ServerErrorResponseDto( "Usuario o contrasena invalidos", ErrorCodeEnum.INVALID_USER_CREDENTIALS,
+        super( new ServerErrorResponseDto("Usuario o contrasena invalidos", ErrorCodeEnum.INVALID_USER_CREDENTIALS,
                 HttpStatus.UNAUTHORIZED ), HttpStatus.UNAUTHORIZED );
     }
 }

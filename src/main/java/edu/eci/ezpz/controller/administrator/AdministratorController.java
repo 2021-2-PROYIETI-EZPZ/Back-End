@@ -12,6 +12,9 @@ public class AdministratorController {
 
     @PostMapping
     public Administrator createAdministrator(@RequestBody AdministratorDto dto){
+        System.out.println("AdministratorController");
+        System.out.println(dto.getEmail());
+        System.out.println(dto.getPassword());
         return administratorService.createAdministrator(dto);
     }
 

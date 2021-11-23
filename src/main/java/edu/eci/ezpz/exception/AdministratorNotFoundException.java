@@ -8,7 +8,7 @@ public class AdministratorNotFoundException extends InternalServerErrorException
 
     public AdministratorNotFoundException()
     {
-        super( new ServerErrorResponseDto( "Administrator not found", ErrorCodeEnum.CLIENT_NOT_FOUND, HttpStatus.NOT_FOUND ),
+        super( new ServerErrorResponseDto( "Administrator not found", ErrorCodeEnum.INVALID_USER_CREDENTIALS, HttpStatus.NOT_FOUND ),
                 HttpStatus.NOT_FOUND );
     }
 }

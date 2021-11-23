@@ -6,13 +6,23 @@ public class MemberShip {
 
     private boolean active;
     private String name;
+    private String codeMembership;
     private String description;
+
+    public String getCodeMembership() {
+        return codeMembership;
+    }
+
+    public void setCodeMembership(String codeMembership) {
+        this.codeMembership = codeMembership;
+    }
 
     public MemberShip() {  }
 
-    public MemberShip(boolean active, String name, String description) {
+    public MemberShip(boolean active, String name,String codeMembership, String description) {
         this.active = active;
         this.name = name;
+        this.codeMembership=codeMembership;
         this.description = description;
     }
 
