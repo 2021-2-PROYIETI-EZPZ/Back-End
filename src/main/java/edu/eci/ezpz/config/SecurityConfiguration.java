@@ -27,10 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     {
         http.addFilterBefore( jwtRequestFilter, BasicAuthenticationFilter.class ).cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/v1/auth/loginSeller").permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/auth/loginClient").permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/auth/loginAdmin").permitAll()
-                .antMatchers(HttpMethod.POST, "/v1/seller").permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/client").permitAll()
                 .antMatchers(HttpMethod.POST,"/v1/admin" ).permitAll()
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
