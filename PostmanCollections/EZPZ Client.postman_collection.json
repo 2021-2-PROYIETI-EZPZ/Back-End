@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d15660ff-5bb5-4507-8874-714dbac5b41d",
+		"_postman_id": "56e59a90-a139-476e-ae05-cb41cb6d7227",
 		"name": "EZPZ Client",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -134,7 +134,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"active\": true,\r\n    \"name\": \"Notificaciones de vendedor\",\r\n    \"codeMembership\": \"MEM_01\",\r\n    \"description\":  \"El sistema notifica al usuario sobre las nuevas actualizaciones de sus vendedores favoritos\"\r\n}",
+							"raw": "{\r\n    \"active\": true,\r\n    \"name\": \"Notificaciones de vendedor\",\r\n    \"description\":  \"El sistema notifica al usuario sobre las nuevas actualizaciones de sus vendedores favoritos\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,12 +142,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ezpz/v1/membership",
+							"raw": "http://localhost:5000/ezpz/v1/membership",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
@@ -169,6 +169,80 @@
 								"localhost"
 							],
 							"port": "8080",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/ezpz/v1/membership",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMembership",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"name\": \"Notificaciones de vendedor\",\r\n    \"startDate\": \"27/11/2021\",\r\n    \"description\":  \"El sistema notifica al usuario sobre las nuevas actualizaciones de sus vendedores favoritos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/ezpz/v1/membership/MEM_1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"MEM_1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMembership",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/ezpz/v1/membership/MEM_01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
