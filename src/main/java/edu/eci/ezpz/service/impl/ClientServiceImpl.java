@@ -2,6 +2,7 @@ package edu.eci.ezpz.service.impl;
 
 import edu.eci.ezpz.controller.client.ClientDto;
 import edu.eci.ezpz.exception.ClientNotFoundException;
+import edu.eci.ezpz.exception.EmptyMembershipField;
 import edu.eci.ezpz.repository.ClientRepository;
 import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.repository.document.MemberShip;
@@ -14,8 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -30,17 +33,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client createClient(ClientDto dto) {
-        MemberShip ms =  new MemberShip();
-        for( String[] m : Constants.memberships ){
-
-            if(dto.getCurrentMemberShip()!=null && m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
-                System.out.println( "entra");
-                ms.setActive( dto.getCurrentMemberShip().isActive() );
-                ms.setName( m[1] );
-                ms.setDescription( m[2] );
-            }
-        }
-        return repository.save( new Client(dto.getEmail(), dto.getName(), dto.getPhoneNumber(), dto.getUsername(), dto.getPassword(), dto.getSearchRecord(), ms) );
+        checkMembership(dto.getCurrentMemberShip());
+        return repository.save( new Client(dto.getEmail(), dto.getName(), dto.getPhoneNumber(), dto.getUsername(), dto.getPassword(), dto.getSearchRecord(), dto.getCurrentMemberShip()) );
     }
 
     @Override
@@ -52,15 +46,16 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public boolean updateClient(ClientDto dto, String email) {
-        if ( repository.findById(email).isPresent() )
+        Optional<Client> op = repository.findById(email);
+        if ( op.isPresent() )
         {
-            Client client = repository.findById( email ).get();
+            Client client = op.get();
             client.update( dto );
             repository.save( client );
             return true;
         }
         else{
-            return false;
+            throw new ClientNotFoundException();
         }
 
     }
@@ -86,5 +81,21 @@ public class ClientServiceImpl implements ClientService {
         return repository.findAll();
     }
 
+
+    private boolean checkMembership(MemberShip ms){
+        boolean response = false;
+        if( ms == null ){ return true; }
+        else{
+            for (Field f : ms.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                try {
+                       if (f.get(ms) == null) { throw new EmptyMembershipField();  }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return response;
+    }
 
 }

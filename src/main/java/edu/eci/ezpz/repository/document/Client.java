@@ -97,21 +97,12 @@ public class Client {
     }
 
     public void update(ClientDto dto) {
-        //this.email= dto.getEmail();
-        this.name = dto.getName();
-        this.phoneNumber = dto.getPhoneNumber();
-        this.username = dto.getUsername();
-        this.password = BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() );
+        this.email= ( this.email != dto.getEmail() && dto.getEmail() != null )? dto.getEmail() : this.email;
+        this.name =  (this.name != dto.getName() && dto.getName() != null )? dto.getName() : this.name ;
+        this.phoneNumber = (this.phoneNumber != dto.getPhoneNumber() && dto.getPhoneNumber() != null )? dto.getPhoneNumber() : this.phoneNumber;
+        this.username = (this.username != dto.getUsername() && dto.getUsername() != null )? dto.getUsername() : this.username;
+        //this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
 
-        this.searchRecord = dto.getSearchRecord();
-        MemberShip ms1 =  new MemberShip();
-        for( String[] m : Constants.memberships ){
-            if( m[0].equals( dto.getCurrentMemberShip().getCodeMembership() ) ){
-                ms1.setActive( dto.getCurrentMemberShip().isActive() );
-                ms1.setName( m[1] );
-                ms1.setDescription( m[2] );
-            }
-        }
-        this.memberShip = ms1;
+        this.memberShip = this.memberShip != dto.getCurrentMemberShip() ? dto.getCurrentMemberShip() : this.memberShip;
     }
 }

@@ -1,5 +1,7 @@
 package edu.eci.ezpz.controller.client;
 
+import edu.eci.ezpz.repository.document.MemberShip;
+
 public class ClientDto {
 
     private String email;
@@ -8,17 +10,45 @@ public class ClientDto {
     private String username;
     private String password;
     private String[] searchRecord;
-    private CurrentMemberShip currentMemberShip;
+    private MemberShip currentMemberShip;
 
-    public ClientDto() {}
+    public ClientDto() { }
 
-    public ClientDto(String email, String name, String phoneNumber, String username, String password, String[] searchRecord, CurrentMemberShip currentMemberShip) {
+    public ClientDto(String email, String name, String phoneNumber, String username, String password, String[] searchRecord, MemberShip currentMemberShip) {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
         this.searchRecord = searchRecord;
+        this.currentMemberShip = currentMemberShip;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSearchRecord(String[] searchRecord) {
+        this.searchRecord = searchRecord;
+    }
+
+    public void setCurrentMemberShip(MemberShip currentMemberShip) {
         this.currentMemberShip = currentMemberShip;
     }
 
@@ -26,55 +56,27 @@ public class ClientDto {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String[] getSearchRecord() {
         return searchRecord;
     }
 
-    public void setSearchRecord(String[] searchRecord) {
-        this.searchRecord = searchRecord;
-    }
-
-    public CurrentMemberShip getCurrentMemberShip() {
+    public MemberShip getCurrentMemberShip() {
         return currentMemberShip;
-    }
-
-    public void setCurrentMemberShip(CurrentMemberShip currentMemberShip) {
-        this.currentMemberShip = currentMemberShip;
     }
 }

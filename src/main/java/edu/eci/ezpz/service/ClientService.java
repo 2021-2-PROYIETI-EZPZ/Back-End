@@ -2,10 +2,8 @@ package edu.eci.ezpz.service;
 
 import edu.eci.ezpz.controller.client.ClientDto;
 import edu.eci.ezpz.repository.document.Client;
-import edu.eci.ezpz.repository.document.Product;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ClientService {
