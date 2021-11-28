@@ -72,7 +72,7 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
                 product.setSite(site);
                 product.setImg(encodedImg);
                 product.setUrl(itemUrl);
-                products.add(product);
+                products.add(new ProductDto(title, price, itemUrl, encodedImg, site));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,7 +99,7 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
                 product.setSite(site);
                 product.setImg(encodedImg);
                 product.setUrl(itemUrl);
-                products.add(product);
+                products.add(new ProductDto(title, price, itemUrl, encodedImg, site));
            }
         } catch (IOException e) {
             e.printStackTrace();
