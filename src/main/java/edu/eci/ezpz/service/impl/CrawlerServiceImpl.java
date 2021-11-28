@@ -59,7 +59,6 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
         try {
             Document doc =  Jsoup.connect("https://listado.mercadolibre.com.co/"+query).get();
             Elements cards =  doc.select("div.andes-card.andes-card--flat.andes-card--default.ui-search-result.ui-search-result--core.andes-card--padding-default");
-            ProductDto product = new ProductDto();
             for (Element e : cards){
                 URL url = new URL(e.select("div.slick-slide.slick-active").get(0).child(0).attr("data-src"));
                 String encodedImg = getEncodedImage( url );
@@ -67,11 +66,6 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
                 String price = e.select("span.price-tag-fraction").get(0).ownText();
                 String title = e.select("h2.ui-search-item__title").get(0).ownText();
                 String site = "Mercado Libre";
-                product.setTitle(title);
-                product.setPrice(price);
-                product.setSite(site);
-                product.setImg(encodedImg);
-                product.setUrl(itemUrl);
                 products.add(new ProductDto(title, price, itemUrl, encodedImg, site));
             }
         } catch (IOException e) {
@@ -85,8 +79,6 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
         try {
             Document doc =  Jsoup.connect("https://www.linio.com.co/search?scroll=&q="+requestedProduct).get();
             Elements cards = doc.select("div.catalogue-product.row");
-
-            ProductDto product = new ProductDto();
             for (Element e : cards){
                 URL url = new URL("https:"+e.select("img.image").attr("data-lazy"));
                 String encodedImg = getEncodedImage( url );
@@ -94,11 +86,6 @@ public class CrawlerServiceImpl implements edu.eci.ezpz.service.CrawlerService {
                 String price = e.select("span.price-main-md").get(0).ownText();
                 String title = e.select("span.title-section").get(0).ownText();
                 String site = "Ilinio";
-                product.setTitle(title);
-                product.setPrice(price);
-                product.setSite(site);
-                product.setImg(encodedImg);
-                product.setUrl(itemUrl);
                 products.add(new ProductDto(title, price, itemUrl, encodedImg, site));
            }
         } catch (IOException e) {
