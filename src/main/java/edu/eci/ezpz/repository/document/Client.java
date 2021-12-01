@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.List;
+
 @Document
 public class Client {
 
@@ -26,7 +28,7 @@ public class Client {
 
     private String[] searchRecord;
 
-    private MemberShip memberShip;
+    private List<MemberShip> memberShip;
 
     public Client() { }
 
@@ -35,9 +37,10 @@ public class Client {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        this.password = password;
         this.searchRecord = searchRecord;
-        this.memberShip = memberShip;
+        if( memberShip != null ){ this.memberShip.add(memberShip); }
+
     }
 
     public String getEmail() {
@@ -88,11 +91,11 @@ public class Client {
         this.searchRecord = searchRecord;
     }
 
-    public MemberShip getMemberShip() {
+    public List<MemberShip> getMemberShip() {
         return memberShip;
     }
 
-    public void setMemberShip(MemberShip memberShip) {
+    public void setMemberShip(List<MemberShip> memberShip) {
         this.memberShip = memberShip;
     }
 
@@ -102,7 +105,6 @@ public class Client {
         this.phoneNumber = (this.phoneNumber != dto.getPhoneNumber() && dto.getPhoneNumber() != null )? dto.getPhoneNumber() : this.phoneNumber;
         this.username = (this.username != dto.getUsername() && dto.getUsername() != null )? dto.getUsername() : this.username;
         //this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
-
-        this.memberShip = this.memberShip != dto.getCurrentMemberShip() ? dto.getCurrentMemberShip() : this.memberShip;
+        if( dto.getCurrentMemberShip() != null ){ this.memberShip.add( dto.getCurrentMemberShip() ); }
     }
 }
