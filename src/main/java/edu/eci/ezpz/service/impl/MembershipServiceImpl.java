@@ -85,7 +85,7 @@ public class MembershipServiceImpl implements MembershipService {
         for( Client c: clients ){
             if( c.getMemberShip() != null ){
                 for( MemberShip m : c.getMemberShip() ){
-                    if( m.getStartDate().after( start ) && m.getStartDate().before( end ) ){ answ.add(m); }
+                    if( m.getStartDate().after( start ) && m.getStartDate().before( end ) || m.getStartDate().equals( start ) || m.getStartDate().equals(end) ){ answ.add(m); }
                 }
             }
         }
