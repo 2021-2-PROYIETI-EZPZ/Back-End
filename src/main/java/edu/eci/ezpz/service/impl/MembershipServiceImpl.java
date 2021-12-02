@@ -1,23 +1,36 @@
 package edu.eci.ezpz.service.impl;
 
+import com.google.gson.GsonBuilder;
+import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.exception.MemberShipNotFoundException;
 import edu.eci.ezpz.repository.MembershipRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Member;
+import java.net.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
+
 
 @Service
 public class MembershipServiceImpl implements MembershipService {
 
     @Autowired
     private MembershipRepository repository;
+
+    @Value( "${CLIENTS_URI}" )
+    private String uri;
 
     @Override
     public List<MemberShip> findAllMemberShips() {
@@ -50,6 +63,35 @@ public class MembershipServiceImpl implements MembershipService {
         return true;
     }
 
+    @Override
+    public List<MemberShip> findAllPurchasedMembership() {
+        List<MemberShip> memberShips = new ArrayList();
+        Client[] res = getAllClients();
+        for (Client c : res){
+            if( c.getMemberShip() != null ){
+                for(MemberShip m : c.getMemberShip()){
+                    memberShips.add(m);
+                }
+            }
+        }
+        return memberShips;
+    }
+
+    @Override
+    public List<MemberShip> filterAllMemberships(Date start, Date end) {
+        List<MemberShip> answ = new ArrayList<MemberShip>();
+        Client[] clients = getAllClients();
+        for( Client c: clients ){
+            if( c.getMemberShip() != null ){
+                for( MemberShip m : c.getMemberShip() ){
+                    if( m.getStartDate().after( start ) && m.getStartDate().before( end ) ){ answ.add(m); }
+                }
+            }
+
+        }
+        return answ;
+    }
+
 
     private String generateId(){
         List<MemberShip> memberShips = findAllMemberShips();
@@ -59,7 +101,39 @@ public class MembershipServiceImpl implements MembershipService {
             if( biggest < num ) { biggest = num; }
         }
         return "MEM_"+String.valueOf(biggest + 1);
-    }
 
+        }
+
+    private Client[] getAllClients(){
+        Client[] answ = null;
+        try {
+            URL obj = new URL(uri);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
+                answ = gson.fromJson( response.toString(), Client[].class );
+            }
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return answ;
+    }
 
 }

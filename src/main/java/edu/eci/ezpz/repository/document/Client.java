@@ -1,11 +1,18 @@
 package edu.eci.ezpz.repository.document;
 
 import edu.eci.ezpz.controller.client.ClientDto;
+import edu.eci.ezpz.exception.EmptyMembershipField;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Document
 public class Client {
@@ -26,7 +33,7 @@ public class Client {
 
     private String[] searchRecord;
 
-    private MemberShip memberShip;
+    private MemberShip[] memberShip;
 
     public Client() { }
 
@@ -35,9 +42,11 @@ public class Client {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        this.password = password;
         this.searchRecord = searchRecord;
-        this.memberShip = memberShip;
+        this.memberShip = new MemberShip[1];
+        if( memberShip != null ){ this.memberShip[0] = memberShip; }
+
     }
 
     public String getEmail() {
@@ -88,11 +97,11 @@ public class Client {
         this.searchRecord = searchRecord;
     }
 
-    public MemberShip getMemberShip() {
+    public MemberShip[] getMemberShip() {
         return memberShip;
     }
 
-    public void setMemberShip(MemberShip memberShip) {
+    public void setMemberShip(MemberShip[] memberShip) {
         this.memberShip = memberShip;
     }
 
@@ -102,7 +111,29 @@ public class Client {
         this.phoneNumber = (this.phoneNumber != dto.getPhoneNumber() && dto.getPhoneNumber() != null )? dto.getPhoneNumber() : this.phoneNumber;
         this.username = (this.username != dto.getUsername() && dto.getUsername() != null )? dto.getUsername() : this.username;
         //this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
+        if( dto.getCurrentMemberShip() != null ){
+            checkMembership(dto.getCurrentMemberShip());
+            MemberShip[] copy = Arrays.copyOf(this.memberShip, this.memberShip.length + 1);
+            copy[copy.length - 1] = dto.getCurrentMemberShip();
+            this.memberShip = copy;
+        }
+    }
 
-        this.memberShip = this.memberShip != dto.getCurrentMemberShip() ? dto.getCurrentMemberShip() : this.memberShip;
+
+    private boolean checkMembership(MemberShip ms){
+        boolean response = false;
+        if( ms == null ){ return true; }
+        else{
+            for (Field f : ms.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                try {
+                    if (f.get(ms) == null  ) { throw new EmptyMembershipField();  }
+
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return response;
     }
 }
