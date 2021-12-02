@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"ietiezpz@gmail.com\",\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"300123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_01\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"ietiezpz@gmail.com\",\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"300123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_1\",\r\n        \"name\": \"el nombre de la membresia\",\r\n        \"startDate\" : \"01/12/2021\",\r\n        \"description\" : \"Description\"\r\n    }\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -33,12 +33,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ezpz/v1/client",
+							"raw": "http://localhost:5000/ezpz/v1/client",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
@@ -54,12 +54,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/ezpz/v1/client/ietiezpz@gmail.com",
+							"raw": "http://localhost:5000/ezpz/v1/client/ietiezpz@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
@@ -76,12 +76,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/ezpz/v1/client",
+							"raw": "http://localhost:5000/ezpz/v1/client",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
@@ -98,7 +98,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"305123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_01\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"ezpz corporation\",\r\n    \"phoneNumber\": \"305123456\",\r\n    \"username\": \"ezpz123\",\r\n    \"password\": \"ezpz9999\",\r\n    \"currentMemberShip\": {\r\n        \"active\": false,\r\n        \"codeMembership\": \"MEM_1\",\r\n        \"name\": \"el nombre de la membresia\",\r\n        \"startDate\" : \"01/12/2021\",\r\n        \"description\" : \"Description\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,12 +106,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/ezpz/v1/client/ietiezpz@gmail.com",
+							"raw": "http://localhost:5000/ezpz/v1/client/ietiezpz@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"ezpz",
 								"v1",
@@ -248,6 +248,59 @@
 								"v1",
 								"membership",
 								"MEM_01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchasedMemberships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/ezpz/v1/membership/purchasedMemberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"purchasedMemberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filterAllMemberships",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\": \"20/12/2021\",\r\n    \"end\": \"30/12/2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/ezpz/v1/membership/filterAllMemberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"ezpz",
+								"v1",
+								"membership",
+								"filterAllMemberships"
 							]
 						}
 					},
