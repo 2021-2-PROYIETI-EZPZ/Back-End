@@ -17,6 +17,7 @@ import java.util.List;
 public class MembershipController {
     @Autowired
     private MembershipService service;
+
     @PostMapping
     public MemberShip createMemberShip(@RequestBody MemberShip dto){
         return service.createMembership( dto );
@@ -24,6 +25,12 @@ public class MembershipController {
 
     @GetMapping
     public List<MemberShip> findAllMemberShips(){ return service.findAllMemberShips(); }
+
+    @GetMapping("/purchasedMemberships")
+    public List<MemberShip> findAllPurchasedMembership(){ return service.findAllPurchasedMembership(); }
+
+    @PostMapping("/filterAllMemberships")
+    public List<MemberShip> filterAllMemberships(@RequestBody DateRange dateRange){ return service.filterAllMemberships( dateRange.getStart(), dateRange.getEnd() ); }
 
     @GetMapping("/{id}")
     public MemberShip findByIdMembership(@PathVariable String id)

@@ -89,10 +89,8 @@ public class ClientServiceImpl implements ClientService {
             for (Field f : ms.getClass().getDeclaredFields()) {
                 f.setAccessible(true);
                 try {
-                       if (f.get(ms) == null) {
-                           System.out.println( "Este está vacío: "+f.get(ms) );
-                           throw new EmptyMembershipField();
-                       }
+                       if (f.get(ms) == null  ) { throw new EmptyMembershipField();  }
+
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
