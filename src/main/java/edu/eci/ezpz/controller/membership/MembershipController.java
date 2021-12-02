@@ -32,6 +32,9 @@ public class MembershipController {
     @PostMapping("/filterAllMemberships")
     public List<MemberShip> filterAllMemberships(@RequestBody DateRange dateRange){ return service.filterAllMemberships( dateRange.getStart(), dateRange.getEnd() ); }
 
+    @PostMapping("/income" )
+    public IncomeResponse getIncome( @RequestBody DateRange dateRange ){ return service.getIncome( dateRange.getStart(), dateRange.getEnd() ); }
+
     @GetMapping("/{id}")
     public MemberShip findByIdMembership(@PathVariable String id)
     {

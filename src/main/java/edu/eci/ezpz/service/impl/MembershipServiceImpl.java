@@ -1,6 +1,7 @@
 package edu.eci.ezpz.service.impl;
 
 import com.google.gson.GsonBuilder;
+import edu.eci.ezpz.controller.membership.IncomeResponse;
 import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.exception.MemberShipNotFoundException;
 import edu.eci.ezpz.repository.MembershipRepository;
@@ -14,7 +15,7 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Member;
+import java.math.BigDecimal;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,9 +88,23 @@ public class MembershipServiceImpl implements MembershipService {
                     if( m.getStartDate().after( start ) && m.getStartDate().before( end ) ){ answ.add(m); }
                 }
             }
-
         }
         return answ;
+    }
+
+    @Override
+    public IncomeResponse getIncome(Date start, Date end) {
+        BigDecimal income = new BigDecimal(0);;
+        Client[] clients = getAllClients();
+        for( Client c: clients ){
+            if( c.getMemberShip() != null ){
+                for( MemberShip m : c.getMemberShip() ){
+                    if( m.getStartDate().after( start ) && m.getStartDate().before( end ) ){ income = income.add(m.getPrice().getAmount()); }
+                }
+            }
+        }
+
+        return new IncomeResponse( start, end, "COP "+ income.toString());
     }
 
 

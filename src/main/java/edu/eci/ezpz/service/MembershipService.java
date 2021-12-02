@@ -1,5 +1,6 @@
 package edu.eci.ezpz.service;
 
+import edu.eci.ezpz.controller.membership.IncomeResponse;
 import edu.eci.ezpz.repository.document.Client;
 import edu.eci.ezpz.repository.document.MemberShip;
 
@@ -14,5 +15,6 @@ public interface MembershipService {
     public boolean deleteById( String id );
     public List<MemberShip> findAllPurchasedMembership();
     public List<MemberShip> filterAllMemberships(Date start, Date end);
+    public IncomeResponse getIncome(Date start, Date end);
 
 }
