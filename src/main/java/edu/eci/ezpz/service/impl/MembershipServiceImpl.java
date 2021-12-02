@@ -7,6 +7,7 @@ import edu.eci.ezpz.repository.MembershipRepository;
 import edu.eci.ezpz.repository.document.MemberShip;
 import edu.eci.ezpz.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -27,6 +28,9 @@ public class MembershipServiceImpl implements MembershipService {
 
     @Autowired
     private MembershipRepository repository;
+
+    @Value( "${CLIENTS_URI}" )
+    private String uri;
 
     @Override
     public List<MemberShip> findAllMemberShips() {
@@ -103,7 +107,7 @@ public class MembershipServiceImpl implements MembershipService {
     private Client[] getAllClients(){
         Client[] answ = null;
         try {
-            URL obj = new URL("http://localhost:5000/ezpz/v1/client");
+            URL obj = new URL(uri);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
