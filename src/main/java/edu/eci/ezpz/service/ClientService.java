@@ -14,4 +14,6 @@ public interface ClientService {
     public boolean getClientByEmail(String email,String password) throws IOException;
 
     List<Client> all();
+
+    Client getClient(String email);
 }

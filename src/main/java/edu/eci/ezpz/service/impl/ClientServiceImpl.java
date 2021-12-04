@@ -81,6 +81,18 @@ public class ClientServiceImpl implements ClientService {
         return repository.findAll();
     }
 
+    @Override
+    public Client getClient(String email) {
+        Optional<Client> op = repository.findById(email);
+        if(op.isPresent()){
+            return op.get();
+        }
+        else{
+            throw new ClientNotFoundException();
+        }
+
+    }
+
 
     private boolean checkMembership(MemberShip ms){
         boolean response = false;
@@ -89,7 +101,7 @@ public class ClientServiceImpl implements ClientService {
             for (Field f : ms.getClass().getDeclaredFields()) {
                 f.setAccessible(true);
                 try {
-                       if (f.get(ms) == null  ) { throw new EmptyMembershipField();  }
+                    if (f.get(ms) == null  ) { throw new EmptyMembershipField();  }
 
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
