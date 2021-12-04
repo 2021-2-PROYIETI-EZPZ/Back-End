@@ -44,7 +44,7 @@ public class ClientController {
         return service.all();
     }
 
-    @GetMapping()
+    @GetMapping("/email")
     public Client getClient(@RequestParam("email") String email) throws IOException {
         return service.getClient(email);
     }
