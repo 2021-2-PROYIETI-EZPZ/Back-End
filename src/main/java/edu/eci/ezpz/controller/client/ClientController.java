@@ -45,7 +45,7 @@ public class ClientController {
     }
 
     @GetMapping("/email")
-    public Client getClient(@RequestParam("email") String email) throws IOException {
+    public Client getClient(@PathVariable String email) throws IOException {
         return service.getClient(email);
     }
 
