@@ -110,7 +110,7 @@ public class Client {
         this.name =  (this.name != dto.getName() && dto.getName() != null )? dto.getName() : this.name ;
         this.phoneNumber = (this.phoneNumber != dto.getPhoneNumber() && dto.getPhoneNumber() != null )? dto.getPhoneNumber() : this.phoneNumber;
         this.username = (this.username != dto.getUsername() && dto.getUsername() != null )? dto.getUsername() : this.username;
-        //this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
+        this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
         if( dto.getCurrentMemberShip() != null ){
             checkMembership(dto.getCurrentMemberShip());
             MemberShip[] copy = Arrays.copyOf(this.memberShip, this.memberShip.length + 1);
