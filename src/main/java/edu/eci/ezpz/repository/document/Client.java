@@ -42,7 +42,7 @@ public class Client {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = password;
+        this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
         this.searchRecord = searchRecord;
         this.memberShip = new MemberShip[1];
         if( memberShip != null ){ this.memberShip[0] = memberShip; }
