@@ -25,7 +25,7 @@ public class Administrator implements User {
     private MemberShip memberShip;
 
     private String password;
-    private static String password2;
+    private String password2;
     private List<RoleEnum> roles;
 
     public Administrator(String email, String name, String username, String password, MemberShip memberShip) {
@@ -34,6 +34,7 @@ public class Administrator implements User {
         this.username = username;
         this.memberShip = memberShip;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        setPassword2(password);
         roles = new ArrayList<>(Collections.singleton(RoleEnum.ADMIN));
     }
 

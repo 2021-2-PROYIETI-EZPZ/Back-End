@@ -46,7 +46,7 @@ public class Client implements User {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
-        //setPassword2(password);
+        setPassword2(password);
         this.searchRecord = searchRecord;
         this.memberShip = new MemberShip[1];
         roles = new ArrayList<>(Collections.singleton(RoleEnum.CLIENT));
