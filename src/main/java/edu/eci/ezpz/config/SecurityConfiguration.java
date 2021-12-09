@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.POST, "/v1/client").permitAll()
                 .antMatchers(HttpMethod.POST,"/v1/admin" ).permitAll()
                 .antMatchers(HttpMethod.PUT, "/v1/client/{email}").permitAll()
-                .antMatchers(HttpMethod.GET, "").permitAll()
+                .antMatchers(HttpMethod.GET, "/v1/crawler/{product}").permitAll()
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
