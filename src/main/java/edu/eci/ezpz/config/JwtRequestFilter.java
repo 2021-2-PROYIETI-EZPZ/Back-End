@@ -29,7 +29,7 @@ import static edu.eci.ezpz.utils.Constants.COOKIE_NAME;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter
 {
-    @Value( "${app.secret}" )
+    @Value( "${SECRET}" )
     String secret;
 
     public JwtRequestFilter(){}
