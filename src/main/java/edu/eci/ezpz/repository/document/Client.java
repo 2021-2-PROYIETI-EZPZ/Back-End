@@ -46,7 +46,7 @@ public class Client implements User {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
-        this.password2 = password;
+        //setPassword2(password);
         this.searchRecord = searchRecord;
         this.memberShip = new MemberShip[1];
         roles = new ArrayList<>(Collections.singleton(RoleEnum.CLIENT));
@@ -96,6 +96,9 @@ public class Client implements User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setPassword2(String password) {
+        this.password2 = password;
     }
 
     public String[] getSearchRecord() {

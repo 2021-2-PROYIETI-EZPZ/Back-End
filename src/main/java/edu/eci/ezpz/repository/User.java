@@ -12,6 +12,8 @@ public interface User {
     public String getUsername();
     public void setUsername(String username);
     public String getPassword();
+    public String getPassword2();
     public void setPassword(String password);
+    public void setPassword2(String password);
     public List<RoleEnum> getRoles();
 }
