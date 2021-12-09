@@ -2,6 +2,7 @@ package edu.eci.ezpz.repository.document;
 
 import edu.eci.ezpz.controller.client.ClientDto;
 import edu.eci.ezpz.exception.EmptyMembershipField;
+import edu.eci.ezpz.repository.User;
 import edu.eci.ezpz.utils.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -12,10 +13,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Document
-public class Client {
+public class Client implements User {
 
     @Id
     private String email;
@@ -30,10 +32,11 @@ public class Client {
     private String username;
 
     private String password;
-
+    private String password2;
     private String[] searchRecord;
 
     private MemberShip[] memberShip;
+    private List<RoleEnum> roles;
 
     public Client() { }
 
@@ -43,8 +46,10 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        this.password2 = password;
         this.searchRecord = searchRecord;
         this.memberShip = new MemberShip[1];
+        roles = new ArrayList<>(Collections.singleton(RoleEnum.CLIENT));
         if( memberShip != null ){ this.memberShip[0] = memberShip; }
 
     }
@@ -85,6 +90,10 @@ public class Client {
         return password;
     }
 
+    public String getPassword2() {
+        return password2;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -105,12 +114,14 @@ public class Client {
         this.memberShip = memberShip;
     }
 
+    public List<RoleEnum> getRoles() {return roles;}
+
     public void update(ClientDto dto) {
         this.email= ( this.email != dto.getEmail() && dto.getEmail() != null )? dto.getEmail() : this.email;
         this.name =  (this.name != dto.getName() && dto.getName() != null )? dto.getName() : this.name ;
         this.phoneNumber = (this.phoneNumber != dto.getPhoneNumber() && dto.getPhoneNumber() != null )? dto.getPhoneNumber() : this.phoneNumber;
         this.username = (this.username != dto.getUsername() && dto.getUsername() != null )? dto.getUsername() : this.username;
-        this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
+        //this.password = this.password !=  BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) ? BCrypt.hashpw( dto.getPassword(), BCrypt.gensalt() ) : this.password ;
         if( dto.getCurrentMemberShip() != null ){
             checkMembership(dto.getCurrentMemberShip());
             MemberShip[] copy = Arrays.copyOf(this.memberShip, this.memberShip.length + 1);

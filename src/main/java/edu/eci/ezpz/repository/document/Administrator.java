@@ -1,11 +1,17 @@
 package edu.eci.ezpz.repository.document;
 import edu.eci.ezpz.controller.administrator.AdministratorDto;
+import edu.eci.ezpz.repository.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Document
-public class Administrator {
+public class Administrator implements User {
 
     @Id
     private String email;
@@ -19,6 +25,8 @@ public class Administrator {
     private MemberShip memberShip;
 
     private String password;
+    private String password2;
+    private List<RoleEnum> roles;
 
     public Administrator(String email, String name, String username, String password, MemberShip memberShip) {
         this.email = email;
@@ -26,6 +34,8 @@ public class Administrator {
         this.username = username;
         this.memberShip = memberShip;
         this.password = BCrypt.hashpw( password, BCrypt.gensalt() );
+        this.password2 = password;
+        roles = new ArrayList<>(Collections.singleton(RoleEnum.ADMIN));
     }
 
     public void update(AdministratorDto dto) {
@@ -70,7 +80,12 @@ public class Administrator {
         return password;
     }
 
+    public String getPassword2() {
+        return password2;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
+    public List<RoleEnum> getRoles() {return roles;}
 }

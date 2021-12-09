@@ -29,7 +29,15 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository repository;
 
 
-
+    @Override
+    public Client findByEmail(String email) throws ClientNotFoundException
+    {
+        Client client = null;
+        Optional<Client> optionalClient = repository.findByEmail(email);
+        if(optionalClient.isPresent()) client = optionalClient.get();
+        else throw new ClientNotFoundException();
+        return client;
+    }
 
     @Override
     public Client createClient(ClientDto dto) {
@@ -111,4 +119,17 @@ public class ClientServiceImpl implements ClientService {
         return response;
     }
 
+    @Override
+    public boolean compareCredential(String dtoPassword, String adminPassword) {
+        boolean check = false;
+        if(dtoPassword.equals(adminPassword))
+        {
+            check = true;
+        }
+        else {
+            check = false;
+        }
+
+        return check;
+    }
 }
